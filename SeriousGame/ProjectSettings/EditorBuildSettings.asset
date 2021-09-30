@@ -4,5 +4,17 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/SeriousGame/Levels/PrototypeScene.unity
+    guid: 0191f666521d9214490e2aed8521f9a0
+  - enabled: 1
+    path: Assets/SeriousGame/Levels/TestScene.unity
+    guid: 40b3aac54355c014f984f297927f69f6
+  - enabled: 1
+    path: Assets/SeriousGame/Levels/StartScene.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/SeriousGame/Levels/FinalScene.unity
+    guid: 82d7eedccd550b545a8f56099ffc7464
   m_configObjects: {}
