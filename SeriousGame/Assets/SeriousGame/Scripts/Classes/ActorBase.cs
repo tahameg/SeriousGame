@@ -6,22 +6,9 @@ namespace SeriousGame.Gameplay
 {
     public abstract class ActorBase : MonoBehaviour, IVincible
     {
-        private float _maxHealth;
-        private float _health;
-
         protected ActorMeta meta;
-        public float MaxHealth
-        {
-            get
-            {
-                return _maxHealth;
-            }
-            set
-            {
-                _maxHealth = value;
-            }
-        }
-
+        private float _health;
+        private float _maxHealth;
         public float Health
         {
             get
@@ -49,7 +36,7 @@ namespace SeriousGame.Gameplay
         {
             get
             {
-                if( MaxHealth == 0f)
+                if (MaxHealth == 0f)
                 {
                     return 0f;
                 }
@@ -74,6 +61,7 @@ namespace SeriousGame.Gameplay
                 }
             }
         }
+
         public bool isAlive
         {
             get
@@ -81,49 +69,55 @@ namespace SeriousGame.Gameplay
                 return _health > 0;
             }
         }
-        protected virtual void Start()
-        {
-            Initialize();
-        }
 
-        protected virtual void Update()
+        public float MaxHealth
         {
-            if (!isAlive)
+            get
             {
-                Die();
+                return _maxHealth;
             }
-        }
-
-        protected virtual void Initialize() {
-        }
-        public virtual void Die()
-        {
-            Health = 0f;
+            set
+            {
+                _maxHealth = value;
+            }
         }
         public virtual void AddHealth(float amount)
         {
             Health -= amount;
         }
+
+        public virtual void Die()
+        {
+            Health = 0f;
+        }
+
         public virtual void Heal()
         {
             Health = MaxHealth;
+        }
+
+        protected abstract void Initialize();
+
+        protected virtual void Start()
+        {
+            Initialize();
         }
     }
 
     public class ActorMeta
     {
         private string _name;
-        public string Name 
+        public ActorMeta(string name)
+        {
+            _name = name;
+        }
+
+        public string Name
         { 
             get
             {
                 return _name;
             }
-        }
-
-        public ActorMeta(string name)
-        {
-            _name = name;
         }
     }
 }

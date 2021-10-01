@@ -2,17 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IFireable : MonoBehaviour
+namespace SeriousGame.Gameplay
 {
-    // Start is called before the first frame update
-    void Start()
+    public interface IFireable
     {
-        
-    }
+        public bool Shoot(float poweri, out IVincible vincible);
 
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
+

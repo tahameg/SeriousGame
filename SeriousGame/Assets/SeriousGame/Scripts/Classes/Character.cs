@@ -14,43 +14,71 @@ namespace SeriousGame.Gameplay
     public class Character : ActorBase
     {
         public string CharacterName;
-        private CharacterClassIndex Index;
-        public TurretBase Turret;
-        public LRFBase LRF;
-        public Vector3 RootSocketPosition;
+        public CharacterClassIndex Index;
+        public Vector3 TurretConnectionPoint;
+        private TurretBase _turret;
+        private LRFBase _lrf;
+
+        public TurretBase Turret 
+        { 
+            get
+            {
+                return _turret;
+            }
+            private set 
+            {
+                _turret = value;
+            } 
+        }
+        public LRFBase LRF
+        {
+            get
+            {
+                return _lrf;
+            }
+            private set
+            {
+                _lrf = value;
+            }
+        }
+        [Header("Development")]
+        public GunBase TestGun;
+        public TurretBase TestTurret;
+        public LRFBase TestLRF;
+        public GameObject TestObject;
+        public float maxSpeed;
+
         protected override void Initialize()
         {
-            base.Initialize();
             meta = new ActorMeta(CharacterName);
-            Health = 100f;
-            MaxHealth = 120f;
-            //UnityEngine.Assertions.Assert.IsTrue(Index != CharacterClassIndex.Undefined, "Index is not set!");
-            //UnityEngine.Assertions.Assert.IsNotNull(Turret, "There is no turret attached!");
-            //UnityEngine.Assertions.Assert.IsNotNull(LRF, "There is no LRF attached!");
+            UnityEngine.Assertions.Assert.IsTrue(Index != CharacterClassIndex.Undefined, "Index is not set!");
         }
 
-        protected override void Update()
+        public void AttachTurret(TurretBase turret)
         {
-            base.Update();
-            if ( Input.GetKey(KeyCode.LeftArrow))
+            if (Turret != null)
             {
-                Turret.RotateInAzimuth(Turret.AzimuthSpeed * Time.deltaTime);
+                RemoveTurret();
             }
+            Turret = turret;
+            Turret.Initialize(transform);
+            PlaceTurret(Turret);
+        }
 
-            if (Input.GetKey(KeyCode.RightArrow))
+        public void RemoveTurret()
+        {
+            if (Turret != null)
             {
-                Turret.RotateInAzimuth(-Turret.AzimuthSpeed * Time.deltaTime);
+                Destroy(Turret.gameObject);
+                Turret = null;
             }
-
-            if (Input.GetKey(KeyCode.UpArrow))
-            {
-                Turret.RotateInElevation(Turret.ElevationSpeed * Time.deltaTime);
-            }
-
-            if (Input.GetKey(KeyCode.DownArrow))
-            {
-                Turret.RotateInElevation(-Turret.ElevationSpeed * Time.deltaTime);
-            }
+        }
+        
+        private void PlaceTurret(TurretBase turret)
+        {
+            Vector3 connectionPointOnTurret = turret.transform.TransformPoint(Turret.RootConnectionPoint);
+            Vector3 connectionPointOnCharacter = transform.TransformPoint(TurretConnectionPoint);
+            turret.transform.Translate(connectionPointOnCharacter - connectionPointOnTurret, Space.World);
         }
 
     }

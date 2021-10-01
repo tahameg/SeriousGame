@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using SeriousGame.Utils;
+using SeriousGame.Gameplay;
 
 [CustomEditor(typeof(GunBase))]
 public class GunBaseInspector : Editor
@@ -15,11 +17,14 @@ public class GunBaseInspector : Editor
         Vector3 FirePoint = handleTransform.TransformPoint(gun.FirePoint);
 
         Handles.color = Color.red;
-        Handles.DrawWireCube(FirePoint, Vector3.one * 0.1f);
+        EditorHelper.DrawCapQuick(FirePoint, handleTransform);
+        
         Handles.color = Color.white;
         Handles.DrawLine(FirePoint, FirePoint + FireAxis);
+        
         Handles.color = Color.green;
+        EditorHelper.DrawCapQuick(ConnectionPoint, handleTransform);
         Handles.DrawWireCube(ConnectionPoint, Vector3.one * 0.05f);
-
+        
     }
 }
