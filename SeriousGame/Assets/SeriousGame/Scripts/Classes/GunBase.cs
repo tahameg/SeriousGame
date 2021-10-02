@@ -6,7 +6,7 @@ using SeriousGame.Common;
 
 namespace SeriousGame.Gameplay
 {
-    public abstract class GunBase : MonoBehaviour, IHeatable, IFireable
+    public class GunBase : MonoBehaviour, IHeatable, IFireable
     {
         // Start is called before the first frame update
 
@@ -20,7 +20,18 @@ namespace SeriousGame.Gameplay
         public float CurrentTemperature;
         public bool isOverHeated;
         public float ShootingRange;
+        public float MaxChargeCapacity;
+        public float ChargeCapacity;
 
+        private bool _isInitialized;
+
+        public bool isInitialized
+        {
+            get
+            {
+                return _isInitialized;
+            }
+        }
         public delegate void OverheatedHandler();
         public delegate void CooledDownHandler();
 
@@ -93,8 +104,24 @@ namespace SeriousGame.Gameplay
             return false;
         }
 
-        public abstract void OnCooledDown();
-        public abstract void OnOverHeated();
+        public virtual void Initialize(Vector3 rootConnectionPoint, Vector3 firePoint, Vector3 fireAxis, float shootingRange, float chargeCapacity)
+        {
+            ConnectionPoint = rootConnectionPoint;
+            FirePoint = firePoint;
+            FireAxis = fireAxis;
+            ShootingRange = shootingRange;
+            ChargeCapacity = chargeCapacity;
+            MaxChargeCapacity = chargeCapacity;
+            _isInitialized = true;
+        }
+        public void OnCooledDown()
+        {
+
+        }
+        public void OnOverHeated()
+        {
+
+        }
     }
 
     public class ShootResult

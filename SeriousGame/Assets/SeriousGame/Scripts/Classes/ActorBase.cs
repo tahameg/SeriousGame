@@ -6,8 +6,9 @@ namespace SeriousGame.Gameplay
 {
     public abstract class ActorBase : MonoBehaviour, IVincible
     {
-        protected ActorMeta meta;
+        public ActorMeta ActorInfo;
         private float _health;
+        private float _previousHealth;
         private float _maxHealth;
         public float Health
         {
@@ -17,6 +18,7 @@ namespace SeriousGame.Gameplay
             }
             set
             {
+                _previousHealth = _health;
                 if (value >= 0)
                 {
                     _health = value;
@@ -31,7 +33,6 @@ namespace SeriousGame.Gameplay
                 }
             }
         }
-
         public float HealthPercentage
         {
             get
@@ -81,9 +82,14 @@ namespace SeriousGame.Gameplay
                 _maxHealth = value;
             }
         }
+
+        public event IVincible.DeathHandler Died;
+        public event IVincible.HealthChangeHandler HealthChanged;
+
+        
         public virtual void AddHealth(float amount)
         {
-            Health -= amount;
+            Health += amount;
         }
 
         public virtual void Die()
@@ -91,32 +97,64 @@ namespace SeriousGame.Gameplay
             Health = 0f;
         }
 
+        public void GetHarmed(IVincible Harmer, float HarmAmount)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public virtual void Heal()
         {
             Health = MaxHealth;
         }
 
-        protected abstract void Initialize();
-
-        protected virtual void Start()
+        protected virtual void Initialize(float maxHealth, ActorMeta actorInfo)
         {
-            Initialize();
+            _maxHealth = maxHealth;
+            _health = maxHealth;
+            ActorInfo = actorInfo;
         }
+
     }
 
     public class ActorMeta
     {
         private string _name;
+        private float _birthTime;
+        private bool _isCharacter;
+
+        public float DeathTime;
         public ActorMeta(string name)
         {
             _name = name;
         }
 
+        public ActorMeta(string name, float birthTime, bool isCharacter=false)
+        {
+            _name = name;
+            _birthTime = birthTime;
+            _isCharacter = isCharacter;
+        }
         public string Name
         { 
             get
             {
                 return _name;
+            }
+        }
+
+        public float BirthTime
+        {
+            get
+            {
+                return _birthTime;
+            }
+        }
+
+        public bool isCharacter
+        {
+            get
+            {
+                return _isCharacter;
             }
         }
     }

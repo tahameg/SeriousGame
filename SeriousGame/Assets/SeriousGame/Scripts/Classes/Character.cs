@@ -4,21 +4,20 @@ using UnityEngine;
 
 namespace SeriousGame.Gameplay
 {
-    public enum CharacterClassIndex 
-    {
-        Undefined,
-        Sarp,
-        SarpL,
-        Alkar
-    }
+
     public class Character : ActorBase
     {
-        public string CharacterName;
-        public CharacterClassIndex Index;
+        private bool _isInitialized;
         public Vector3 TurretConnectionPoint;
         private TurretBase _turret;
         private LRFBase _lrf;
-
+        public bool isInitialized 
+        {
+            get
+            {
+                return _isInitialized;
+            }
+        }
         public TurretBase Turret 
         { 
             get
@@ -41,17 +40,13 @@ namespace SeriousGame.Gameplay
                 _lrf = value;
             }
         }
-        [Header("Development")]
-        public GunBase TestGun;
-        public TurretBase TestTurret;
-        public LRFBase TestLRF;
-        public GameObject TestObject;
-        public float maxSpeed;
 
-        protected override void Initialize()
+        public void Initialize(float maxHealth, ActorMeta meta, Vector3 turretConnectionPoint)
         {
-            meta = new ActorMeta(CharacterName);
-            UnityEngine.Assertions.Assert.IsTrue(Index != CharacterClassIndex.Undefined, "Index is not set!");
+            base.Initialize(maxHealth, meta);
+            TurretConnectionPoint = turretConnectionPoint;
+            this.name = name;
+            _isInitialized = true;
         }
 
         public void AttachTurret(TurretBase turret)
@@ -61,8 +56,7 @@ namespace SeriousGame.Gameplay
                 RemoveTurret();
             }
             Turret = turret;
-            Turret.Initialize(transform);
-            PlaceTurret(Turret);
+            PlaceTurret(turret);
         }
 
         public void RemoveTurret()

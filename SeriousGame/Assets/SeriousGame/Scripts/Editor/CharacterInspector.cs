@@ -16,7 +16,7 @@ public class CharacterInspector : Editor
 
         Handles.color = Color.red;
         EditorHelper.DrawCapQuick(turretConnectionPoint, handleTransform);
-        Handles.DrawLine(turretConnectionPoint, turretConnectionPoint + handleTransform.up * 0.1f);
+        Handles.DrawLine(turretConnectionPoint, turretConnectionPoint - handleTransform.up * 0.1f);
 
     }
 }

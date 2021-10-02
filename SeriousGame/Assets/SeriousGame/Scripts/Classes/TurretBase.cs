@@ -151,18 +151,21 @@ namespace SeriousGame.Gameplay
             Gun = gun;
             gun.transform.parent = transform;
             PlaceGun(Gun);
+            Elevation = ElevationLimits.min > 0f ? ElevationLimits.min : 0.0f;
         }
 
         /// <summary>
         /// Initializes the rotation axis according to the parrent transform;
         /// </summary>
         /// <param name="parent">The parrent transform that this turret is attached to.</param>
-        public virtual void Initialize(Transform parent)
+        public virtual void Initialize(Transform parent, AxisLimits axisLimits, Vector3 rootConnectionPoint, Vector3 gunConnectionPoint)
         {
             transform.parent = parent;
             transform.rotation = transform.parent.rotation;
+            RootConnectionPoint = rootConnectionPoint;
+            GunConnectionPoint = gunConnectionPoint;
             _isInitialized = true;
-            Elevation = ElevationLimits.min > 0f ? ElevationLimits.min : 0.0f;
+            
         }
 
         public void RemoveGun()

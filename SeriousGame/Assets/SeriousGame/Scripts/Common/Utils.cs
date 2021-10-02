@@ -42,6 +42,15 @@ namespace SeriousGame.Utils
         {
             Handles.DotHandleCap(0, position, handleTransform.rotation * Quaternion.LookRotation(Vector3.up), size, EventType.Repaint);
         }
+        public static void DrawCubeQuick(Vector3 position)
+        {
+            Handles.DrawWireCube(position, Vector3.one * 0.05f);
+        }
+
+        public static void DrawArrowQuick(Vector3 position, Vector3 direction, Transform localTransform, float size)
+        {
+            Handles.ArrowHandleCap(0, position, Quaternion.LookRotation(direction, Vector3.up), size, EventType.Repaint);
+        }
     }
 }
 
