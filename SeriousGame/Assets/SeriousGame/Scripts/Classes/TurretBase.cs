@@ -32,7 +32,7 @@ namespace SeriousGame.Gameplay
             }
         }
     }
-    public class TurretBase : MonoBehaviour
+    public abstract class TurretBase : MonoBehaviour
     {
         [Header("Structural")]
         public Vector3 GunConnectionPoint;
@@ -60,7 +60,7 @@ namespace SeriousGame.Gameplay
         {
             get
             {
-                return transform.parent.forward;
+                return transform.forward;
             }
         }
 
@@ -122,7 +122,12 @@ namespace SeriousGame.Gameplay
         {
             get
             {
-                return _isInitialized;
+                bool isGunInitialized = false;
+                if( Gun != null)
+                {
+                    isGunInitialized = Gun.isInitialized;
+                }
+                return _isInitialized && isGunInitialized;
             }
         }
         
@@ -130,7 +135,7 @@ namespace SeriousGame.Gameplay
         {
             get
             {
-                return transform.parent.up;
+                return transform.transform.up;
             }
         }
 
@@ -164,6 +169,7 @@ namespace SeriousGame.Gameplay
             transform.rotation = transform.parent.rotation;
             RootConnectionPoint = rootConnectionPoint;
             GunConnectionPoint = gunConnectionPoint;
+            ElevationLimits = axisLimits;
             _isInitialized = true;
             
         }
@@ -245,9 +251,9 @@ namespace SeriousGame.Gameplay
             gun.transform.Translate(connectionPointOnTurret - connectionPointOnGun, Space.World);
         }
 
-        public bool Shoot(float power, out IVincible vincible)
+        public bool Shoot(float energy, out RaycastHit hitResult)
         {
-            return Gun.Shoot(power, out vincible);
+            return Gun.Shoot(energy, out hitResult);
         }
     }
 }

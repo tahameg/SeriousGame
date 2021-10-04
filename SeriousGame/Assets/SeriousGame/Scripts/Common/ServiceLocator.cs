@@ -8,6 +8,11 @@ namespace SeriousGame.Common
     public class ServiceLocator : Singleton<ServiceLocator>
     {
         private Dictionary<Type, Service> _services;
+        public delegate void ServiceRegisterHandler(Type type);
+        
+        public event ServiceRegisterHandler ServiceRegistered;
+        public event ServiceRegisterHandler ServiceUnregistered;
+
         private void Awake()
         {
             CreateSingleton( this );
@@ -56,6 +61,7 @@ namespace SeriousGame.Common
             if (!isServiceLocated)
             {
                 _services.Add(typeof(T), FindObjectOfType<T>());
+                ServiceRegistered?.Invoke(typeof(T));
             }
         }
 
@@ -84,6 +90,7 @@ namespace SeriousGame.Common
                 return;
             }
             _services.Remove(typeof(T));
+            ServiceUnregistered?.Invoke(typeof(T));
         }
 
         /// <summary>

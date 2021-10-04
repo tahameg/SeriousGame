@@ -171,7 +171,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4784567190664467597}
-  - component: {fileID: 4640923134665535728}
   m_Layer: 0
   m_Name: GunE
   m_TagString: Untagged
@@ -196,26 +195,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
---- !u!114 &4640923134665535728
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3642628507498260106}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a6daebe29708a049866c62ce49f8161, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ConnectionPoint: {x: 0, y: 0, z: 0}
-  FirePoint: {x: 0.97, y: 0, z: 0}
-  FireAxis: {x: 0.3, y: 0, z: 0}
-  MaxTemperature: 0
-  MinTemperature: 0
-  CurrentTemperature: 0
-  isOverHeated: 0
-  ShootingRange: 0
 --- !u!1 &7214892652382027153
 GameObject:
   m_ObjectHideFlags: 0
@@ -227,7 +206,6 @@ GameObject:
   - component: {fileID: 6570534117624194130}
   - component: {fileID: 2792754683128907818}
   - component: {fileID: 5942331801042053346}
-  - component: {fileID: 2498124833788245867}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -298,16 +276,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &2498124833788245867
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7214892652382027153}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}

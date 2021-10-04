@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: GunTypeE
   m_EditorClassIdentifier: 
   TypeName: ELaser
-  Index: 2
+  Index: 3
   GunPrefabPath: Guns/E/GunE
   GunFirePoint: {x: 0.95, y: 0, z: 0}
   GunFireAxis: {x: 1, y: 0, z: 0}

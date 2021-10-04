@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: GunTypeQ
   m_EditorClassIdentifier: 
   TypeName: QLaser
-  Index: 0
+  Index: 1
   GunPrefabPath: Guns/Q/GunQ
   GunFirePoint: {x: 0.95, y: 0, z: 0}
   GunFireAxis: {x: 1, y: 0, z: 0}

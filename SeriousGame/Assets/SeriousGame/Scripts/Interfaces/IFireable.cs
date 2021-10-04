@@ -6,7 +6,7 @@ namespace SeriousGame.Gameplay
 {
     public interface IFireable
     {
-        public bool Shoot(float poweri, out IVincible vincible);
+        bool Shoot(float energy, out RaycastHit hitResult);
 
     }
 }

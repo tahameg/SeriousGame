@@ -2,17 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+namespace SeriousGame.Gameplay
 {
-    // Start is called before the first frame update
-    void Start()
+    public class Enemy : ActorBase
     {
-        
-    }
+        private void Start()
+        {
+        }
+        protected override void Initialize(float maxHealth, ActorMeta actorInfo)
+        {
+            base.Initialize(maxHealth, actorInfo);
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        }
+
+        public override void OnDied()
+        {
+            base.OnDied();
+            StartCoroutine("DyingRoutine");
+        }
+
+        IEnumerator DyingRoutine()
+        {
+            yield return new WaitForSeconds(4f);
+            Destroy(gameObject);
+        }
     }
 }
+

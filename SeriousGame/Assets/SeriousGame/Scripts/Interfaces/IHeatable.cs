@@ -6,8 +6,8 @@ namespace SeriousGame.Gameplay
 {
     public interface IHeatable
     {
-        public void HeatUp(float amount);
-        public void CoolDown(float amount);
+        void HeatUp(float amount);
+        void CoolDown(float amount);
     }
 }
 

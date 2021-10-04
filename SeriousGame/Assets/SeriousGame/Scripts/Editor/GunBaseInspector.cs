@@ -8,7 +8,7 @@ using SeriousGame.Utils;
 [CustomEditor(typeof(GunBase))]
 public class GunBaseInspector : Editor
 {
-    private void OnSceneGUI()
+    public virtual void OnSceneGUI()
     {
         GunBase gun = target as GunBase;
         Transform handleTransform = gun.transform;

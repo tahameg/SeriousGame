@@ -92,7 +92,6 @@ GameObject:
   - component: {fileID: 792954445663659588}
   - component: {fileID: 2563806400352587357}
   - component: {fileID: 7457493655396738842}
-  - component: {fileID: 6120500816871198389}
   m_Layer: 0
   m_Name: Mesh5
   m_TagString: Untagged
@@ -163,19 +162,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &6120500816871198389
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3183736104891712298}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4090601135708635706
 GameObject:
   m_ObjectHideFlags: 0
@@ -187,7 +173,6 @@ GameObject:
   - component: {fileID: 866382995077089453}
   - component: {fileID: 8699728277310325049}
   - component: {fileID: 6318318302269489277}
-  - component: {fileID: 371350416132394408}
   m_Layer: 0
   m_Name: Mesh4
   m_TagString: Untagged
@@ -258,19 +243,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &371350416132394408
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4090601135708635706}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5055856489238642336
 GameObject:
   m_ObjectHideFlags: 0
@@ -282,7 +254,6 @@ GameObject:
   - component: {fileID: 2530405876087781882}
   - component: {fileID: 4894390731223392659}
   - component: {fileID: 8335495302850907510}
-  - component: {fileID: 2946301880849835269}
   m_Layer: 0
   m_Name: Mesh3
   m_TagString: Untagged
@@ -353,19 +324,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &2946301880849835269
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5055856489238642336}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5454230421074554236
 GameObject:
   m_ObjectHideFlags: 0
@@ -492,7 +450,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2811947009680396400}
   m_Layer: 0
-  m_Name: TurretC
+  m_Name: Turret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -506,7 +464,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6550416755266784250}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.81, y: 0, z: 0}
+  m_LocalPosition: {x: -0.494, y: 0.349, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 324581016240115462}

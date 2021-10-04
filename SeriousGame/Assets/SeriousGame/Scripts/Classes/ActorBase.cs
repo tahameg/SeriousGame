@@ -10,6 +10,12 @@ namespace SeriousGame.Gameplay
         private float _health;
         private float _previousHealth;
         private float _maxHealth;
+        
+        public delegate void DeathHandler();
+        public delegate void HealthChangeHandler(float healthBeforeChange, float healthAfterChange);
+
+        event DeathHandler Died;
+        event HealthChangeHandler HealthChanged;
         public float Health
         {
             get
@@ -83,13 +89,10 @@ namespace SeriousGame.Gameplay
             }
         }
 
-        public event IVincible.DeathHandler Died;
-        public event IVincible.HealthChangeHandler HealthChanged;
-
-        
         public virtual void AddHealth(float amount)
         {
             Health += amount;
+            HealthChanged?.Invoke(_previousHealth, _health);
         }
 
         public virtual void Die()
@@ -97,9 +100,10 @@ namespace SeriousGame.Gameplay
             Health = 0f;
         }
 
-        public void GetHarmed(IVincible Harmer, float HarmAmount)
+        public virtual void OnDied()
         {
-            throw new System.NotImplementedException();
+            Debug.Log("Died!");
+            Died?.Invoke();
         }
 
         public virtual void Heal()
@@ -114,8 +118,21 @@ namespace SeriousGame.Gameplay
             ActorInfo = actorInfo;
         }
 
+        public void HandleShot(float energy, out bool isKillShot)
+        {
+            AddHealth(-energy);
+            Debug.Log("Harmed: " + Health + " left!");
+            if(_previousHealth > 0f && _health <= 0f)
+            {
+                isKillShot = true;
+                OnDied();
+            }
+            else
+            {
+                isKillShot = false;
+            }
+        }
     }
-
     public class ActorMeta
     {
         private string _name;

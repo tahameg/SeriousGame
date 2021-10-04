@@ -6,7 +6,7 @@ using SeriousGame.Common;
 
 namespace SeriousGame.Gameplay
 {
-    public class GunBase : MonoBehaviour, IHeatable, IFireable
+    public abstract class GunBase : MonoBehaviour, IFireable
     {
         // Start is called before the first frame update
 
@@ -14,14 +14,12 @@ namespace SeriousGame.Gameplay
         public Vector3 ConnectionPoint;
         public Vector3 FirePoint;
         public Vector3 FireAxis;
+        public GameObject LaserBeamObject;
+        public float LaserBeamSpeed = 15f;
+        public float MaxLaserLifespan = 6f;
+        public GameObject LaserShotPointObject;
         [Header("Operational")]
-        public float MaxTemperature;
-        public float MinTemperature;
-        public float CurrentTemperature;
-        public bool isOverHeated;
         public float ShootingRange;
-        public float MaxChargeCapacity;
-        public float ChargeCapacity;
 
         private bool _isInitialized;
 
@@ -32,104 +30,30 @@ namespace SeriousGame.Gameplay
                 return _isInitialized;
             }
         }
-        public delegate void OverheatedHandler();
-        public delegate void CooledDownHandler();
 
-        public event OverheatedHandler OverHeated;
-        public event CooledDownHandler CooledDown;
-
-
-        public virtual void Start()
+        public virtual bool Shoot(float energy, out RaycastHit hitResult)
         {
-            OverHeated += OnOverHeated;
-            CooledDown += OnCooledDown;
+            Ray ray = new Ray(transform.TransformPoint(FirePoint), transform.TransformDirection(FireAxis));
+            return Physics.Raycast(ray, out hitResult, ShootingRange);
         }
 
-        private void OnDestroy()
-        {
-            OverHeated -= OnOverHeated;
-            CooledDown -= OnCooledDown;
-        }
-        public void CoolDown(float amount)
-        {
-            if(amount >= 0f)
-            {
-                if(CurrentTemperature - amount < MinTemperature)
-                {
-                    CurrentTemperature = MinTemperature;
-                    CooledDown?.Invoke();
-                    isOverHeated = false;
-                }
-                else
-                {
-                    CurrentTemperature -= amount;
-                }
-            }
-        }
-
-        public void HeatUp(float amount)
-        {
-            if (amount >= 0f)
-            {
-                if (CurrentTemperature + amount > MinTemperature)
-                {
-                    CurrentTemperature = MinTemperature;
-                    OverHeated?.Invoke();
-                    isOverHeated = false;
-                }
-                else
-                {
-                    CurrentTemperature -= amount;
-                }
-            }
-        }
-
-        public bool Shoot(float power, out IVincible vincible)
-        {
-            if (!isOverHeated)
-            {
-                RaycastHit hit;
-                Ray ray = new Ray(transform.TransformPoint(FirePoint), transform.TransformDirection(FireAxis));
-                if (Physics.Raycast(ray, out hit, ShootingRange))
-                {
-                    IVincible returnedVincible = hit.rigidbody.transform.GetComponent<IVincible>();
-                    if ( returnedVincible != null)
-                    {
-                        vincible = returnedVincible;
-                        return true;
-                    }
-                }
-            }
-            vincible = null;
-            return false;
-        }
-
-        public virtual void Initialize(Vector3 rootConnectionPoint, Vector3 firePoint, Vector3 fireAxis, float shootingRange, float chargeCapacity)
+        public virtual void Initialize(Vector3 rootConnectionPoint, Vector3 firePoint, Vector3 fireAxis, float shootingRange)
         {
             ConnectionPoint = rootConnectionPoint;
             FirePoint = firePoint;
             FireAxis = fireAxis;
             ShootingRange = shootingRange;
-            ChargeCapacity = chargeCapacity;
-            MaxChargeCapacity = chargeCapacity;
+            if (LaserBeamObject == null)
+            {
+                LaserBeamObject = Resources.Load<GameObject>("Disposables/LaserBeam");
+            }
+            if (LaserShotPointObject == null)
+            {
+                LaserShotPointObject = Resources.Load<GameObject>("Disposables/LaserShotPoint");
+            }
             _isInitialized = true;
         }
-        public void OnCooledDown()
-        {
 
-        }
-        public void OnOverHeated()
-        {
-
-        }
-    }
-
-    public class ShootResult
-    {
-        public IVincible target;
-        public bool didHit;
-        public float hitRange;
-        public bool isKillShot;
     }
 }
 
